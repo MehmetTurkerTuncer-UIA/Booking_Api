@@ -1,39 +1,55 @@
-import { date } from "joi";
-import { DataTypes, sequelize } from "sequelize";
-import { underscoredIf } from "sequelize/lib/utils";
+import { DataTypes } from "sequelize";
+import { sequelize } from "../configs/db.js";
 
-const ReservationSchema = new Sequelize();
 
-const Reservation = sequelize("reservations", {
+const Reservation = sequelize.define("Reservation", {
   guestName: {
-    type: DataTypes.STRING(256),
+    type: DataTypes.STRING(100),
     allowNull: false,
     validate: {
       notEmpty: true,
-      len: [2 - 100],
+      len: [2, 100],
     },
     set(value) {
-      this.setDataValue("guestName", value.trim().replace(/\s+/g, " "));
-    },
+      if(typeof value === 'string'){
+        this.setDataValue("guestName", value.trim().replace(/\s+/g, ' '));
+    }},
   },
 
   roomNumber: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    validate: { min: 1, isInt: true },
+    validate: { isInt: true, min:1  },
   },
   checkIn: {
-    type: DataTypes.DATEONLY(),
+    type: DataTypes.DATEONLY,
     allowNull: false,
   },
   checkOut: {
-    type: DataTypes.DATEONLY(),
+    type: DataTypes.DATEONLY,
     allowNull: false,
   },
+  status:{
+    type: DataTypes.ENUM('Pending', 'Confirmed', 'Cancelled'),
+    defaultValue: 'Pending'
+
+  },
+  
 },{
-    tableName: ReservationSchema,
+    tableName: 'reservations',
     timestamps: true,
-    underscored: true
+    underscored: true,
+    validate: {
+        checkDates(){
+            const inDate = new Date(this.checkIn)
+            const outDate = new Date(this.checkOut)
+
+            if(this.checkIn && this.checkOut && (outDate <= inDate)){
+                throw new Error('checkOut must be later than checkIn')
+            }
+        }
+    }
+
 });
 
 export default Reservation;
