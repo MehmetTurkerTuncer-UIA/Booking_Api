@@ -66,15 +66,31 @@ const userController = {
       #swagger.summary = "Update User"
       #swagger.parameters['body'] = { in: 'body', required: true, schema: { guestName: "Ali Veli", roomNumber: 101, checkIn: "2025-09-01", checkOut: "2025-09-05", status: "Pending" } }
     */
+
+
     const id = Number(req.params.id);
-    const item = await User.findOne({ where: { id } });
-    if (!item) {
+    const user = await User.findOne({ where: { id } });
+    
+    if (!user) {
       const err = new Error("User not found");
       err.status = 404;
       throw err;
     }
-    await item.update(req.body);
-    return res.status(200).json({ error: false, data: item });
+
+    const {email, password} = req.body || {}
+    if(!email || !password ){
+      const err = new Error('Email ve password zorunludur')
+      err.status = 400
+      throw err
+    } 
+
+    const payload = emailAndPasswordChecker(req.body)
+    await user.update(payload)
+
+    
+    return res.status(200).json({ 
+      error: false,
+      data : user });
   },
 
   // DELETE /api/users/:id
