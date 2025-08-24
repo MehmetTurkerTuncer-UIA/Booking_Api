@@ -15,6 +15,6 @@ Reservation.belongsTo(User, { foreignKey: "userId" });
 Room.hasMany(Reservation, { foreignKey: "roomId" });
 Reservation.belongsTo(Room, { foreignKey: "roomId" });
 
-export { User, Reservation }
+export { User, Reservation, Room }
 
 
