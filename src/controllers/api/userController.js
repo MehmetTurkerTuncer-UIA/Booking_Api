@@ -2,7 +2,7 @@
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
-import {User} from "../../models/index.js";
+import { User, Reservation } from "../../models/index.js"
 import { emailAndPasswordChecker, validateEmailOnly } from "../../utils/emailAndPasswordChecker.js"
 
 
@@ -50,7 +50,17 @@ const userController = {
   // GET /api/users/:id
   read: async (req, res) => {
     const id = Number(req.params.id);
-    const data = await User.findOne({ where: { id } });
+    const data = await User.findOne({ where: { id },
+    include: [
+      {
+        model: Reservation,
+        attributes: ["id", "roomNumber", "checkIn", "checkOut", "status"]
+      }
+    ],
+    // Rezervasyonları tarihe göre sıralamak istersen:
+    order: [[Reservation, "checkIn", "ASC"]]
+
+    });
     if (!data) {
       const err = new Error("User not found");
       err.status = 404;
