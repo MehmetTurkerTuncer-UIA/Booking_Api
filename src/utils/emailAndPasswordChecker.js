@@ -1,7 +1,7 @@
 // utils/emailAndPasswordChecker.js
 "use strict";
 
-import passwordEncrypt from "../helpers/passwordEncrypt.js";
+import passwordEncrypt from "./passwordEncrypt";
 
 // Regex sabitleri:
 const EMAIL_REGEX =
@@ -29,7 +29,7 @@ export function emailAndPasswordChecker(data = {}) {
   const email = emailRaw.trim().toLowerCase();
 
   if (!EMAIL_REGEX.test(email)) {
-    throw new Error("Email formatı geçersiz.");
+    throw new Error("Email formati geçersiz.");
   }
 
   // Password kontrol

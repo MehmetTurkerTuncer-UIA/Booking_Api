@@ -65,10 +65,18 @@ const User = sequelize.define('User', {
     // DİKKAT: Hash HOOK’u YOK — hash'i controller'da emailAndPasswordChecker yapacak
   },
 
-  role: {
-    type: DataTypes.ENUM('Admin', 'Staff', 'Guest'),
-    defaultValue: 'Guest',
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
+
+  isStaff: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+
+
+
 }, {
   tableName: 'users',
   timestamps: true,

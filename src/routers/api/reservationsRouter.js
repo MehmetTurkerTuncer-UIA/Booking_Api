@@ -9,7 +9,7 @@ const router = express.Router()
 // routes/reservation:
 
 // const reservation = require('../controllers/reservation')
-import reservationController from "../../controllers/api/reservations.controller.js";
+import reservationController from "../../controllers/api/reservationsController.js";
 
 // URL: /reservations
 
