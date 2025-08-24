@@ -1,7 +1,7 @@
 // utils/emailAndPasswordChecker.js
 "use strict";
 
-import passwordEncrypt from "./passwordEncrypt";
+import passwordEncrypt from "./passwordEncrypt.js";
 
 // Regex sabitleri:
 const EMAIL_REGEX =
