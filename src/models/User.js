@@ -1,3 +1,8 @@
+"use strict";
+/* -------------------------------------------------------
+    | FULLSTACK TEAM | NODEJS / EXPRESS |
+------------------------------------------------------- */
+
 // src/models/User.js
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../configs/db.js'

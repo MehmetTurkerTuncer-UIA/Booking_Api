@@ -1,4 +1,4 @@
-import Reservation from "../../models/Reservation.js";
+import {Reservation} from "../../models/index.js";
 
 const reservationController = {
   // GET /api/reservations

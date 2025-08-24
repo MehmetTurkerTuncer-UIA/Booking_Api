@@ -1,19 +1,24 @@
+"use strict";
+/* -------------------------------------------------------
+    | FULLSTACK TEAM | NODEJS / EXPRESS |
+------------------------------------------------------- */
+
 import { DataTypes } from "sequelize";
 import { sequelize } from "../configs/db.js";
 
 
 const Reservation = sequelize.define("Reservation", {
-  guestName: {
-    type: DataTypes.STRING(100),
+  userId:{
+    type: DataTypes.INTEGER,
     allowNull: false,
-    validate: {
-      notEmpty: true,
-      len: [2, 100],
+    references: {
+      model: 'users',   // table name
+      key: 'id'
     },
-    set(value) {
-      if(typeof value === 'string'){
-        this.setDataValue("guestName", value.trim().replace(/\s+/g, ' '));
-    }},
+    onDelete: 'CASCADE',
+    onUpdate:'CASCADE'
+  
+  
   },
 
   roomNumber: {
