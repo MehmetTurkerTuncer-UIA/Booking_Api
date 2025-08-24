@@ -42,7 +42,8 @@ app.use(errorHandler)
 
 // --- DB bağlan + sync + server başlat ---
 await connectDB()
-//await sequelize.sync({ alter: true }) // geliştirme aşamasında işine yarar
+//await sequelize.sync({ force: true }) // geliştirme aşamasında işine yarar
+
 
 const PORT = process.env.PORT || 8000
 const server = app.listen(PORT, () =>
