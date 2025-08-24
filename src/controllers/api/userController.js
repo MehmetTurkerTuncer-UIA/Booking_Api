@@ -2,7 +2,7 @@
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
-import { User, Reservation } from "../../models/index.js"
+import { User, Reservation, Room } from "../../models/index.js"
 import { emailAndPasswordChecker, validateEmailOnly } from "../../utils/emailAndPasswordChecker.js"
 
 
@@ -52,11 +52,17 @@ const userController = {
     const id = Number(req.params.id);
     const data = await User.findOne({ where: { id },
     include: [
-      {
-        model: Reservation,
-        attributes: ["id", "roomNumber", "checkIn", "checkOut", "status"]
-      }
-    ],
+    {
+      model: Reservation,
+      attributes: ["id", "checkIn", "checkOut", "status"],
+      include: [
+        {
+          model: Room,
+          attributes: ["id", "roomNumber", "roomType", "capacity", "isAvailable"]
+        }
+      ]
+    }
+  ],
     // Rezervasyonları tarihe göre sıralamak istersen:
     order: [[Reservation, "checkIn", "ASC"]]
 
