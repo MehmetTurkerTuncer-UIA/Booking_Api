@@ -4,7 +4,7 @@
 ------------------------------------------------------- */
 //const router = require('express').Router()
 import express from "express";
-const router = express.Router()
+const userRouter = express.Router()
 /* ------------------------------------------------------- */
 // routes/user:
 
@@ -13,12 +13,12 @@ import userController from "../../controllers/api/userController.js";
 
 // URL: /users
 
-router
+userRouter
   .route("/")
   .get(userController.list)
   .post(userController.create);
 
-router
+userRouter
   .route("/:id")
   .get(userController.read)
   .put(userController.update)
@@ -27,4 +27,4 @@ router
 
 /* ------------------------------------------------------- */
 // Exports:
-export default router;
+export default userRouter;

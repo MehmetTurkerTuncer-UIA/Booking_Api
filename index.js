@@ -4,7 +4,7 @@ import 'express-async-errors'
 import morgan from 'morgan'
 import { sequelize, connectDB } from './src/configs/db.js' // sequelize'ı da al
 // import './src/models/Reservation.js' // modellerini burada import et (ilişkiler kurulacaksa)
-import router from './src/routers/api/index.js' 
+import apiRouter from './src/routers/api/index.js' 
 import errorHandler from './src/middlewares/errorHandler.js'
 
 
@@ -26,13 +26,15 @@ app.get('/', (req, res) => {
   res.json({ ok: true, message: 'Booking_Api is running 🚀' })
 })
 
+
+
+app.use("/api", apiRouter )
+
 // 404
 app.use((req, res, next) => {
   res.status(404).json({ error: true, message: 'Not Found' })
 })
 
-
-app.use("./api", router )
 
 // ERROR HANDLER
 app.use(errorHandler)
@@ -40,7 +42,7 @@ app.use(errorHandler)
 
 // --- DB bağlan + sync + server başlat ---
 await connectDB()
-// await sequelize.sync({ alter: true }) // geliştirme aşamasında işine yarar
+//await sequelize.sync({ alter: true }) // geliştirme aşamasında işine yarar
 
 const PORT = process.env.PORT || 8000
 const server = app.listen(PORT, () =>

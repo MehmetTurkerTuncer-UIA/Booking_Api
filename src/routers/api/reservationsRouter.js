@@ -4,7 +4,7 @@
 ------------------------------------------------------- */
 //const router = require('express').Router()
 import express from "express";
-const router = express.Router()
+const reservationsRouter = express.Router()
 /* ------------------------------------------------------- */
 // routes/reservation:
 
@@ -13,12 +13,12 @@ import reservationController from "../../controllers/api/reservationsController.
 
 // URL: /reservations
 
-router
+reservationsRouter
   .route("/")
   .get(reservationController.list)
   .post(reservationController.create);
 
-router
+reservationsRouter
   .route("/:id")
   .get(reservationController.read)
   .put(reservationController.update)
@@ -27,4 +27,4 @@ router
 
 /* ------------------------------------------------------- */
 // Exports:
-export default router;
+export default reservationsRouter;

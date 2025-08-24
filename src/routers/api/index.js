@@ -8,14 +8,14 @@ import userRouter from "./userRouter.js";
 import findSearchSortPage from "../../middlewares/findSearchSortPage.js"
 
 
-const router = express.Router();
+const apiRouter = express.Router();
 
 
-router.use(findSearchSortPage)
+apiRouter.use(findSearchSortPage)
 
-router.use("/users", userRouter);
+apiRouter.use("/users", userRouter);
 
-router.use("/reservations", reservationsRouter);
+apiRouter.use("/reservations", reservationsRouter);
 
 
-export default router;
+export default apiRouter;
