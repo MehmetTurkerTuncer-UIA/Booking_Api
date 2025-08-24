@@ -7,6 +7,6 @@ import reservationsRouter from "./reservationsRouter.js";
 
 const router = express.Router();
 
-router.use("/api/reservations", reservationsRouter);
+router.use("/reservations", reservationsRouter);
 
 export default router;

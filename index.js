@@ -4,7 +4,7 @@ import 'express-async-errors'
 import morgan from 'morgan'
 import { sequelize, connectDB } from './src/configs/db.js' // sequelize'ı da al
 // import './src/models/Reservation.js' // modellerini burada import et (ilişkiler kurulacaksa)
-
+import router from './src/routers/api/index.js' 
 import errorHandler from './src/middlewares/errorHandler.js'
 
 
@@ -30,6 +30,9 @@ app.get('/', (req, res) => {
 app.use((req, res, next) => {
   res.status(404).json({ error: true, message: 'Not Found' })
 })
+
+
+app.use("./api", router )
 
 // ERROR HANDLER
 app.use(errorHandler)
