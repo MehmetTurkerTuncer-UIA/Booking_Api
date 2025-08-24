@@ -50,14 +50,23 @@ const reservationController = {
     */
     const id = Number(req.params.id);
     const item = await Reservation.findOne({ where: { id } });
+  
     if (!item) {
       const err = new Error("Reservation not found");
       err.status = 404;
       throw err;
     }
+  
+  
+  
     await item.update(req.body);
     return res.status(200).json({ error: false, data: item });
   },
+
+
+
+
+
 
   // DELETE /api/reservations/:id
   delete: async (req, res) => {
