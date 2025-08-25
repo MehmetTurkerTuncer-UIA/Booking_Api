@@ -10,20 +10,21 @@ const reservationsRouter = express.Router()
 
 // const reservation = require('../controllers/reservation')
 import reservationController from "../../controllers/api/reservationsController.js";
+import permissions from "../../middlewares/permissions.js";
 
 // URL: /reservations
 
 reservationsRouter
   .route("/")
-  .get(reservationController.list)
-  .post(reservationController.create);
+  .get(permissions.isAdmin, reservationController.list)
+  .post(permissions.isLogin, reservationController.create);
 
 reservationsRouter
   .route("/:id")
-  .get(reservationController.read)
-  .put(reservationController.update)
-  .patch(reservationController.update)
-  .delete(reservationController.delete);
+  .get(permissions.isLogin, reservationController.read)
+  .put(permissions.isLogin, reservationController.update)
+  .patch(permissions.isLogin, reservationController.update)
+  .delete(permissions.isStaff, reservationController.delete);
 
 /* ------------------------------------------------------- */
 // Exports:

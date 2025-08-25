@@ -10,20 +10,20 @@ const roomRouter = express.Router()
 
 // const room = require('../controllers/room')
 import roomController from "../../controllers/api/roomController.js";
-
+import permissions from "../../middlewares/permissions.js";
 // URL: /rooms
 
 roomRouter
   .route("/")
-  .get(roomController.list)
-  .post(roomController.create);
+  .get(permissions.isStaff, roomController.list)
+  .post(permissions.isAdmin, roomController.create);
 
 roomRouter
   .route("/:id")
-  .get(roomController.read)
-  .put(roomController.update)
-  .patch(roomController.update)
-  .delete(roomController.delete);
+  .get(permissions.isLogin, roomController.read)
+  .put(permissions.isStaff, roomController.update)
+  .patch(rpermissions.isStaff, roomController.update)
+  .delete(permissions.isAdmin, roomController.delete);
 
 /* ------------------------------------------------------- */
 // Exports:

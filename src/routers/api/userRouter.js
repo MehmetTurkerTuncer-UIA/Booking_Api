@@ -5,25 +5,27 @@
 //const router = require('express').Router()
 import express from "express";
 const userRouter = express.Router()
+
 /* ------------------------------------------------------- */
 // routes/user:
 
 // const user = require('../controllers/user')
 import userController from "../../controllers/api/userController.js";
+import permissions from "../../middlewares/permissions.js";
 
 // URL: /users
 
 userRouter
   .route("/")
-  .get(userController.list)
+  .get(permissions.isAdmin, userController.list)
   .post(userController.create);
 
 userRouter
   .route("/:id")
-  .get(userController.read)
-  .put(userController.update)
-  .patch(userController.update)
-  .delete(userController.delete);
+  .get(permissions.isLogin, userController.read)
+  .put(permissions.isLogin, userController.update)
+  .patch(permissions.isLogin, userController.update)
+  .delete(permissions.isLogin, userController.delete);
 
 /* ------------------------------------------------------- */
 // Exports:
