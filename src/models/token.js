@@ -22,16 +22,13 @@ const Token = sequelize.define("Token", {
     type: DataTypes.STRING(255), // 64 yeter ama güvenli olsun diye biraz geniş tuttum
     allowNull: false,
     unique: true,
-    set(value) {
-      if (typeof value === "string") {
-        this.setDataValue("token", value.trim().replace(/\s+/g, " "))
-      }
-    },
+    
   },
 }, {
   tableName: "tokens",
   timestamps: true,
   underscored: true,
+  indexes: [{ unique: true, fields: ['user_id'] }]
 });
 
 export default Token;

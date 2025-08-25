@@ -8,7 +8,7 @@ const authRouter = express.Router()
 
 
 
-// URL: /auth
+// URL: /auths
 
 authRouter.post('/login', authController.login)
 authRouter.post('/refresh', authController.refresh)

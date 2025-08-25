@@ -5,9 +5,13 @@
 
 import User from './User.js'
 import Reservation from './Reservation.js'
-import Room from './Room.js';
-import Token from './Token.js';
+import Room from './Room.js'
+import Token from './Token.js'
+// ... diğer modeller
 
+// İLİŞKİLER
+User.hasMany(Token, { foreignKey: 'userId' })
+Token.belongsTo(User, { foreignKey: 'userId' })
 
 // User ↔ Reservation
 User.hasMany(Reservation, { foreignKey: "userId" });
