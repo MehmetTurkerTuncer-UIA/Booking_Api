@@ -7,6 +7,7 @@ import reservationsRouter from "./reservationsRouter.js"
 import userRouter from "./userRouter.js";
 import roomRouter from "./roomRouter.js";
 import tokenRouter from "./tokenRouter.js";
+import authRouter from "./authRouter.js"
 
 import findSearchSortPage from "../../middlewares/findSearchSortPage.js"
 
@@ -20,6 +21,8 @@ apiRouter.use(findSearchSortPage)
 apiRouter.use("/users", userRouter);
 
 apiRouter.use("/tokens", tokenRouter);
+
+apiRouter.use("/auths", authRouter);
 
 apiRouter.use("/rooms", roomRouter);
 
