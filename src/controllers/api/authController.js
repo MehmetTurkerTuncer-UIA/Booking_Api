@@ -79,6 +79,8 @@ const authController = {
       { expiresIn: "3d" }
     );
 
+
+
     return res.status(200).json({
       error: false,
       token: tokenRow.token, // simple token
